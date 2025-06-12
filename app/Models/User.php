@@ -6,36 +6,38 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+
 class User extends Authenticatable implements MustVerifyEmail
 {
+    use HasFactory, Notifiable;
 
     public function articles()
-{
-    return $this->hasMany(Article::class);
-}
-public function comments()
-{
-    return $this->hasMany(Comment::class);
-}
+    {
+        return $this->hasMany(Article::class);
+    }
 
-public function likes()
-{
-    return $this->hasMany(Like::class);
-}
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
 
     /**
      * The attributes that are mass assignable.
      *
-     * @var list<string>
+     * @var array<int, string>
      */
-protected $fillable = [
-    'name',
-    'email',
-    'password',
-    'role', // Ajoute ceci si tu utilises le champ role
-];
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'role',
+        'newsletter_subscribed', // ⭐ AJOUTER CETTE LIGNE
+    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -57,6 +59,7 @@ protected $fillable = [
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'newsletter_subscribed' => 'boolean', // ⭐ AJOUTER CETTE LIGNE
         ];
     }
 }
