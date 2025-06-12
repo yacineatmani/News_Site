@@ -8,11 +8,13 @@ type Category = {
     name: string;
 };
 
+type PageProps = {
+    categories: Category[];
+    auth: { user?: { role: string } };
+};
+
 export default function Index() {
-    const { categories, auth } = usePage().props as {
-        categories: Category[];
-        auth: { user?: { role: string } };
-    };
+    const { categories, auth } = usePage<PageProps>().props;
 
     const titleRef = useRef<HTMLHeadingElement>(null);
 

@@ -1,7 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
 
-export type Appearance = 'light' | 'dark' | 'system';
-
 const prefersDark = () => {
     if (typeof window === 'undefined') {
         return false;
@@ -9,6 +7,8 @@ const prefersDark = () => {
 
     return window.matchMedia('(prefers-color-scheme: dark)').matches;
 };
+export type Appearance = 'light' | 'dark' | 'system';
+
 
 const setCookie = (name: string, value: string, days = 365) => {
     if (typeof document === 'undefined') {

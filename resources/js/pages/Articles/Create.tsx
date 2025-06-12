@@ -9,17 +9,25 @@ type ArticlePageProps = {
 
 export default function Create() {
     const { categories, tags } = usePage<ArticlePageProps>().props;
-    const { data, setData, post, errors, processing } = useForm({
+    const { data, setData, post, errors, processing } = useForm<{
+        title: string;
+        content: string;
+        image: File | null;
+        category_id: string;
+        tags: number[];
+    }>({
         title: '',
         content: '',
-        image: '',
+        image: null,
         category_id: '',
         tags: [],
     });
 
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
-        post(route('articles.store'));
+        post(route('articles.store'), {
+            forceFormData: true, // important pour envoyer un fichier !
+        });
     }
 
     return (
@@ -40,12 +48,11 @@ export default function Create() {
                     </div>
 
                     <div>
-                        <label className="block font-semibold mb-1">Image (URL)</label>
+                        <label className="block font-semibold mb-1">Image</label>
                         <input
-                            type="text"
-                            value={data.image}
-                            onChange={e => setData('image', e.target.value)}
-                            placeholder="URL de l'image"
+                            type="file"
+                            accept="image/*"
+                            onChange={e => setData('image', e.target.files ? e.target.files[0] : null)}
                             className="w-full border rounded px-3 py-2"
                         />
                         {errors.image && <div className="text-red-500 text-sm">{errors.image}</div>}

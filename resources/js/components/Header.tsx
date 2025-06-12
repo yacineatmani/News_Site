@@ -1,7 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
 import ThemeToggle from '@/components/ThemeToggle';
-import AppearanceDropdown from '@/components/appearance-dropdown';
-import AppearanceTabs from '@/components/appearance-tabs';
 import { type SharedData } from '@/types';
 
 export default function Header() {
@@ -18,8 +16,6 @@ export default function Header() {
             </nav>
             <div className="flex gap-2">
                 <ThemeToggle />
-                <AppearanceDropdown />
-                <AppearanceTabs />
                 {auth.user ? (
                     <Link href={route('dashboard')}>Tableau de bord</Link>
                 ) : (
