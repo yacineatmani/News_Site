@@ -1,18 +1,30 @@
 <?php
 
+
 namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
+use Symfony\Component\HttpFoundation\Response;
 
 class CheckRole
 {
-    public function handle(Request $request, Closure $next, ...$roles)
+    public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        if (!auth()->check() || !in_array(auth()->user()->role, $roles)) {
-            return Inertia::render('Welcome'); // Redirige vers welcome.tsx
+        // Si pas connecté, rediriger vers login
+        if (!auth()->check()) {
+            return redirect()->route('login');
         }
-        return $next($request);
+
+        $user = auth()->user();
+        $userRole = trim($user->role ?? ''); // Nettoyage et valeur par défaut
+        
+        // Vérification simple
+        if (in_array($userRole, $roles)) {
+            return $next($request);
+        }
+
+        // Accès refusé
+        abort(403, "Accès refusé. Votre rôle: '{$userRole}'. Rôles requis: " . implode(', ', $roles));
     }
 }
