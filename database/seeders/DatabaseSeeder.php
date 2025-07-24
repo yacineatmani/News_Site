@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
@@ -51,9 +50,10 @@ class DatabaseSeeder extends Seeder
             Category::create(['name' => $categoryName]);
         }
 
-        // Appeler ArticleSeeder
+        // Appeler ArticleSeeder ET le nouveau ProductionDataSeeder (optionnel)
         $this->call([
             ArticleSeeder::class,
+            // ProductionDataSeeder::class, // Décommente si tu veux les nouvelles données
         ]);
     }
 }

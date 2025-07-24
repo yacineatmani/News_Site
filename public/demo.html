@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewsZone - Actualités Modernes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #2D3748 0%, #1A202C 100%); }
+        .neon-blue { color: #00A3E0; }
+        .lemon-yellow { color: #F7E025; }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    <div class="min-h-screen flex flex-col items-center justify-center px-6">
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <h1 class="text-6xl md:text-7xl font-bold text-white mb-4">
+                News<span class="neon-blue">Zone</span>
+            </h1>
+            <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+                Votre destination pour l'actualité moderne, 
+                <span class="lemon-yellow font-semibold">fraîche et engageante</span>
+            </p>
+        </header>
+
+        <!-- Navigation -->
+        <div class="flex gap-4 mb-12">
+            <a href="/articles" class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg">
+                Découvrir les articles
+            </a>
+            <a href="/register" class="px-6 py-3 border-2 border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white font-semibold rounded-xl transition-all duration-300">
+                Rejoindre
+            </a>
+        </div>
+
+        <!-- Features -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto mb-12">
+            <div class="bg-blue-600/20 backdrop-blur-sm border border-blue-500/30 p-4 rounded-xl text-center">
+                <div class="text-2xl mb-2">📰</div>
+                <h3 class="text-lg font-semibold text-white mb-1">Actualités</h3>
+                <p class="text-gray-300 text-sm">Toujours à jour</p>
+            </div>
+            <div class="bg-yellow-500/20 backdrop-blur-sm border border-yellow-400/30 p-4 rounded-xl text-center">
+                <div class="text-2xl mb-2">🎯</div>
+                <h3 class="text-lg font-semibold text-white mb-1">Ciblé</h3>
+                <p class="text-gray-300 text-sm">Pour vous</p>
+            </div>
+            <div class="bg-blue-600/20 backdrop-blur-sm border border-blue-500/30 p-4 rounded-xl text-center">
+                <div class="text-2xl mb-2">💬</div>
+                <h3 class="text-lg font-semibold text-white mb-1">Social</h3>
+                <p class="text-gray-300 text-sm">Communauté</p>
+            </div>
+            <div class="bg-yellow-500/20 backdrop-blur-sm border border-yellow-400/30 p-4 rounded-xl text-center">
+                <div class="text-2xl mb-2">⚡</div>
+                <h3 class="text-lg font-semibold text-white mb-1">Rapide</h3>
+                <p class="text-gray-300 text-sm">Interface fluide</p>
+            </div>
+        </div>
+
+        <!-- Demo Articles -->
+        <div class="w-full max-w-4xl bg-white/10 backdrop-blur-sm rounded-2xl p-8 mb-8">
+            <h2 class="text-3xl font-bold text-white mb-6 text-center">Articles à la Une</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-gray-800/50 rounded-lg p-6">
+                    <h3 class="text-white font-bold mb-2">Technologie de demain</h3>
+                    <p class="text-gray-300 text-sm mb-4">Découvrez les innovations qui vont changer notre monde...</p>
+                    <span class="inline-block px-3 py-1 bg-blue-600 text-white rounded text-sm">Lire plus</span>
+                </div>
+                <div class="bg-gray-800/50 rounded-lg p-6">
+                    <h3 class="text-white font-bold mb-2">Économie mondiale</h3>
+                    <p class="text-gray-300 text-sm mb-4">Les dernières tendances du marché financier global...</p>
+                    <span class="inline-block px-3 py-1 bg-blue-600 text-white rounded text-sm">Lire plus</span>
+                </div>
+                <div class="bg-gray-800/50 rounded-lg p-6">
+                    <h3 class="text-white font-bold mb-2">Culture & Société</h3>
+                    <p class="text-gray-300 text-sm mb-4">L'art contemporain et son impact sur notre société...</p>
+                    <span class="inline-block px-3 py-1 bg-blue-600 text-white rounded text-sm">Lire plus</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="w-full max-w-md bg-gradient-to-r from-blue-600 to-gray-700 rounded-xl p-6 text-center">
+            <h3 class="text-xl font-bold text-white mb-2">Restez informé !</h3>
+            <p class="text-gray-200 mb-4">Newsletter quotidienne</p>
+            <div class="flex gap-2">
+                <input type="email" placeholder="Email" class="flex-1 px-3 py-2 rounded-lg text-gray-900">
+                <button class="px-4 py-2 bg-yellow-500 text-gray-900 font-bold rounded-lg hover:bg-yellow-400 transition-colors">S'abonner</button>
+            </div>
+        </div>
+
+        <footer class="text-center text-gray-400 mt-8">
+            <p>&copy; 2024 NewsZone - Projet Laravel/React moderne</p>
+        </footer>
+    </div>
+</body>
+</html>
