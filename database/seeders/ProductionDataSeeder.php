@@ -106,11 +106,11 @@ class ProductionDataSeeder extends Seeder
 
         // 4. Créer les articles (anciens + nouveaux)
         $articles = [
-            // ===== VOS ARTICLES ORIGINAUX =====
+            // ===== VOS ARTICLES ORIGINAUX (avec images publiques) =====
             [
                 'title' => 'Accord historique à la COP30',
                 'content' => 'Un accord sans précédent a été signé lors de la COP30, marquant un tournant majeur dans la lutte contre le changement climatique. Les 196 pays participants se sont engagés à réduire leurs émissions de gaz à effet de serre de 60% d\'ici 2030.',
-                'image' => 'image/Environement.jpg',
+                'image' => 'https://images.unsplash.com/photo-1569163139394-de4e4f43e4e3?w=800&q=80',
                 'user_id' => $admin->id,
                 'category_id' => $climat->id,
                 'status' => 'published',
@@ -119,7 +119,7 @@ class ProductionDataSeeder extends Seeder
             [
                 'title' => 'L\'IA dépasse les attentes en 2025',
                 'content' => 'L\'intelligence artificielle continue de révolutionner notre quotidien en 2025. Les nouveaux modèles d\'IA générative atteignent des performances inédites dans la création artistique et la recherche scientifique.',
-                'image' => 'image/IA2.jpg',
+                'image' => 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80',
                 'user_id' => $webmaster->id,
                 'category_id' => $tech->id,
                 'status' => 'published',
@@ -128,7 +128,7 @@ class ProductionDataSeeder extends Seeder
             [
                 'title' => 'Euro 2024 : les moments forts',
                 'content' => 'L\'Euro 2024 a offert des moments inoubliables aux amateurs de football. Entre performances exceptionnelles et surprises des outsiders, ce championnat restera dans les mémoires.',
-                'image' => 'image/euro2024.jpg',
+                'image' => 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&q=80',
                 'user_id' => $author->id,
                 'category_id' => $sport->id,
                 'status' => 'published',
@@ -137,7 +137,7 @@ class ProductionDataSeeder extends Seeder
             [
                 'title' => 'Festival de Cannes 2025 : les favoris',
                 'content' => 'Le 78ème Festival de Cannes s\'annonce exceptionnel avec une sélection remarquable mettant l\'accent sur la diversité culturelle et les nouvelles formes de narration.',
-                'image' => 'image/Festival-Cannes.jpg',
+                'image' => 'https://images.unsplash.com/photo-1489599735462-c3345854d1b0?w=800&q=80',
                 'user_id' => $author->id,
                 'category_id' => $culture->id,
                 'status' => 'published',
@@ -146,17 +146,18 @@ class ProductionDataSeeder extends Seeder
             [
                 'title' => 'Élections mondiales : ce qui change',
                 'content' => 'L\'année 2025 marque un tournant politique majeur avec plusieurs élections cruciales redéfinissant les équilibres géopolitiques.',
-                'image' => 'image/Election.jpg',
+                'image' => 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=800&q=80',
                 'user_id' => $admin->id,
                 'category_id' => $politique->id,
                 'status' => 'published',
                 'created_at' => now()->subDays(5),
             ],
 
-            // ===== NOUVEAUX ARTICLES TECHNIQUES =====
+            // ===== NOUVEAUX ARTICLES TECHNIQUES (avec images) =====
             [
                 'title' => 'Laravel 11 : Les nouveautés révolutionnaires',
                 'content' => 'Laravel 11 apporte de nombreuses améliorations qui vont changer votre façon de développer. Découvrez les nouvelles fonctionnalités, l\'amélioration des performances et les nouveaux outils qui font de cette version un incontournable pour tout développeur PHP moderne.',
+                'image' => 'https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=800&q=80',
                 'user_id' => $admin->id,
                 'category_id' => $dev->id,
                 'status' => 'published',
@@ -165,6 +166,7 @@ class ProductionDataSeeder extends Seeder
             [
                 'title' => 'React 18 et les Server Components : Guide complet',
                 'content' => 'Les Server Components de React 18 révolutionnent la façon dont nous construisons des applications web. Ce guide complet vous explique comment les utiliser, leurs avantages et comment migrer vos projets existants pour bénéficier de ces nouvelles fonctionnalités.',
+                'image' => 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&q=80',
                 'user_id' => $author->id,
                 'category_id' => $dev->id,
                 'status' => 'published',
@@ -173,6 +175,7 @@ class ProductionDataSeeder extends Seeder
             [
                 'title' => 'Intelligence Artificielle en 2025 : Tendances et innovations',
                 'content' => 'L\'année 2025 marque un tournant dans le développement de l\'IA. Entre les nouveaux modèles de langage, l\'amélioration des performances et les nouvelles applications, découvrez ce qui vous attend dans le monde de l\'intelligence artificielle.',
+                'image' => 'https://images.unsplash.com/photo-1555255707-c07966088b7b?w=800&q=80',
                 'user_id' => $webmaster->id,
                 'category_id' => $tech->id,
                 'status' => 'published',
@@ -181,6 +184,7 @@ class ProductionDataSeeder extends Seeder
             [
                 'title' => 'Tailwind CSS 4.0 : Révolution du design web',
                 'content' => 'Tailwind CSS 4.0 introduit de nouveaux concepts révolutionnaires pour le design web. Variables CSS natives, nouvelle syntaxe et outils améliorés : tout ce que vous devez savoir sur cette mise à jour majeure.',
+                'image' => 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80',
                 'user_id' => $author->id,
                 'category_id' => $design->id,
                 'status' => 'published',
@@ -189,6 +193,7 @@ class ProductionDataSeeder extends Seeder
             [
                 'title' => 'Sécurité web en 2025 : Meilleures pratiques',
                 'content' => 'La sécurité web évolue constamment. Découvrez les dernières menaces, les nouvelles techniques de protection et les meilleures pratiques à adopter pour sécuriser vos applications web en 2025.',
+                'image' => 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&q=80',
                 'user_id' => $admin->id,
                 'category_id' => $tech->id,
                 'status' => 'published',
