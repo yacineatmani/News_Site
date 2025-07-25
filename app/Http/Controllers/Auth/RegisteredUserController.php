@@ -40,12 +40,15 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => 'lecteur', // Rôle par défaut
+            'newsletter_subscribed' => false, // Par défaut pas abonné
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return to_route('dashboard');
+        // Rediriger vers la page de vérification email au lieu du dashboard
+        return to_route('verification.notice');
     }
 }
