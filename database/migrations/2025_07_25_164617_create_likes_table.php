@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('articles', function (Blueprint $table) {
+        Schema::create('likes', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('content');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('category_id')->constrained()->onDelete('cascade');
-            $table->string('image')->nullable();
-            $table->string('status')->default('draft'); // draft, published, archived
+            $table->foreignId('article_id')->constrained()->onDelete('cascade');
             $table->timestamps();
+            
+            // Un utilisateur ne peut liker qu'une fois le même article
+            $table->unique(['user_id', 'article_id']);
         });
     }
 
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('articles');
+        Schema::dropIfExists('likes');
     }
 };

@@ -16,7 +16,7 @@ class ArticleSeeder extends Seeder
             [
                 'title' => 'Accord historique à la COP30',
                 'content' => 'Un accord sans précédent a été signé lors de la COP30, marquant un tournant majeur dans la lutte contre le changement climatique. Les 196 pays participants se sont engagés à réduire leurs émissions de gaz à effet de serre de 60% d\'ici 2030.',
-                'image' => 'https://images.unsplash.com/photo-1569163139394-de4e4f43e4e3?w=800&q=80',
+                'image' => 'https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=800&q=80',
                 'category' => 'Climat'
             ],
             [
@@ -34,7 +34,7 @@ class ArticleSeeder extends Seeder
             [
                 'title' => 'Festival de Cannes 2025 : les favoris',
                 'content' => 'Le 78ème Festival de Cannes s\'annonce exceptionnel avec une sélection remarquable mettant l\'accent sur la diversité culturelle et les nouvelles formes de narration.',
-                'image' => 'https://images.unsplash.com/photo-1489599735462-c3345854d1b0?w=800&q=80',
+                'image' => 'https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=800&q=80',
                 'category' => 'Culture'
             ],
             [

@@ -11,9 +11,10 @@ class HomeController extends Controller
 {
     public function index()
     {
-        // Récupérer les articles avec toutes les relations et informations nécessaires
+        // Récupérer les articles PUBLIÉS avec toutes les relations et informations nécessaires
         $articles = Article::with(['user', 'category', 'tags'])
             ->withCount(['likes', 'comments'])
+            ->where('status', 'published') // ⭐ Filtrer seulement les articles publiés
             ->orderBy('created_at', 'desc')
             ->take(10)
             ->get();
