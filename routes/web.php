@@ -29,6 +29,23 @@ Route::get('categories', [CategoryController::class, 'index'])->name('categories
 Route::post('newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
 Route::get('newsletter/unsubscribe/{encodedEmail}', [NewsletterController::class, 'unsubscribe'])->name('newsletter.unsubscribe');
 
+// 🚨 ROUTES TEMPORAIRES POUR DEBUG - PAS D'AUTHENTIFICATION REQUISE
+Route::get('test-verify/{id}', function($id) {
+    $user = \App\Models\User::findOrFail($id);
+    $user->markEmailAsVerified();
+    return redirect()->route('dashboard')->with('message', 'Email vérifié avec succès !');
+})->name('test.verify');
+
+Route::get('debug-users', function() {
+    $users = \App\Models\User::all();
+    $html = '<h1>Utilisateurs:</h1><ul>';
+    foreach($users as $user) {
+        $html .= '<li>ID: ' . $user->id . ' - Email: ' . $user->email . ' - Nom: ' . $user->name . ' - Vérifié: ' . ($user->email_verified_at ? 'Oui' : 'Non') . '</li>';
+    }
+    $html .= '</ul>';
+    return $html;
+});
+
 // Routes authentifiées
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -72,13 +89,6 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('ad
     Route::patch('users/{user}/newsletter', [DashboardController::class, 'toggleNewsletter'])->name('users.toggle-newsletter');
     Route::get('stats', [DashboardController::class, 'stats'])->name('stats');
 });
-
-// 🚨 ROUTE TEMPORAIRE POUR TEST - À SUPPRIMER APRÈS
-Route::get('test-verify/{id}', function($id) {
-    $user = \App\Models\User::findOrFail($id);
-    $user->markEmailAsVerified();
-    return redirect()->route('dashboard')->with('message', 'Email vérifié avec succès !');
-})->name('test.verify');
 
 // Routes paramétrées à la FIN (après toutes les routes spécifiques)
 Route::get('articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
