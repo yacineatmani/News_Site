@@ -7,6 +7,7 @@ use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -71,6 +72,13 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('ad
     Route::patch('users/{user}/newsletter', [DashboardController::class, 'toggleNewsletter'])->name('users.toggle-newsletter');
     Route::get('stats', [DashboardController::class, 'stats'])->name('stats');
 });
+
+// 🚨 ROUTE TEMPORAIRE POUR TEST - À SUPPRIMER APRÈS
+Route::get('test-verify/{id}', function($id) {
+    $user = \App\Models\User::findOrFail($id);
+    $user->markEmailAsVerified();
+    return redirect()->route('dashboard')->with('message', 'Email vérifié avec succès !');
+})->name('test.verify');
 
 // Routes paramétrées à la FIN (après toutes les routes spécifiques)
 Route::get('articles/{article}', [ArticleController::class, 'show'])->name('articles.show');

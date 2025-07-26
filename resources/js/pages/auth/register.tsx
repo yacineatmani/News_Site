@@ -27,25 +27,8 @@ export default function Register() {
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
         
-        // 🔍 DEBUG TEMPORAIRE pour Railway
-        console.log('🚀 INSCRIPTION SUBMIT - START', {
-            formData: data,
-            routeUrl: route('register'),
-            processing: processing
-        });
-        
         post(route('register'), {
-            onStart: () => {
-                console.log('🔄 INSCRIPTION - Request started');
-            },
-            onSuccess: (response) => {
-                console.log('✅ INSCRIPTION - Success', response);
-            },
-            onError: (errors) => {
-                console.log('❌ INSCRIPTION - Error', errors);
-            },
             onFinish: () => {
-                console.log('🏁 INSCRIPTION - Finished');
                 reset('password', 'password_confirmation');
             },
         });
