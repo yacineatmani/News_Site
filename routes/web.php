@@ -57,6 +57,29 @@ Route::get('debug-config', function() {
     ];
 });
 
+// 🚨 ROUTE TEST GÉNÉRATION URL DE VÉRIFICATION
+Route::get('debug-verify-url/{id}', function($id) {
+    $user = \App\Models\User::findOrFail($id);
+    
+    // Générer une URL de vérification comme Laravel le fait
+    $verificationUrl = \Illuminate\Support\Facades\URL::temporarySignedRoute(
+        'verification.verify',
+        now()->addMinutes(60),
+        [
+            'id' => $user->getKey(),
+            'hash' => sha1($user->getEmailForVerification()),
+        ]
+    );
+    
+    return [
+        'user_id' => $user->id,
+        'user_email' => $user->email,
+        'verification_url' => $verificationUrl,
+        'url_parts' => parse_url($verificationUrl),
+        'current_url_config' => config('app.url'),
+    ];
+});
+
 // Routes authentifiées
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
