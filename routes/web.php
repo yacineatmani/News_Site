@@ -46,6 +46,17 @@ Route::get('debug-users', function() {
     return $html;
 });
 
+// 🚨 ROUTE DEBUG CONFIG - POUR DIAGNOSTIC
+Route::get('debug-config', function() {
+    return [
+        'APP_KEY' => config('app.key') ? 'Définie (' . substr(config('app.key'), 0, 20) . '...)' : 'Non définie',
+        'APP_URL' => config('app.url'),
+        'APP_ENV' => config('app.env'),
+        'MAIL_MAILER' => config('mail.default'),
+        'APP_TIMEZONE' => config('app.timezone'),
+    ];
+});
+
 // Routes authentifiées
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
