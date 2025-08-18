@@ -1,11 +1,6 @@
 # tl;dr : Pipeline CI/CD GitHub Actions pour News_Site
 
-- Crée le dossier `.github/workflows/` à la racine du projet.
-- Ajoute le fichier `ci-cd.yml` avec le contenu ci-dessous.
-- Ce workflow s’exécute à chaque push sur les branches `dev`, `staging`, ou `main`.
-- Il installe les dépendances, lance les tests, zippe le code, puis déploie sur AWS via Terraform.
 
----
 
 name: CI/CD Pipeline
 
@@ -62,11 +57,3 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ env.AWS_REGION }}
 
----
-
-# À faire côté GitHub
-- Ajoute tes clés AWS dans les secrets du repo :
-  - `AWS_ACCESS_KEY_ID`
-  - `AWS_SECRET_ACCESS_KEY`
-
-# Ce workflow automatise le build, les tests et le déploiement sur AWS à chaque push sur dev, staging ou main.
