@@ -1,0 +1,72 @@
+# tl;dr : Pipeline CI/CD GitHub Actions pour News_Site
+
+- Crée le dossier `.github/workflows/` à la racine du projet.
+- Ajoute le fichier `ci-cd.yml` avec le contenu ci-dessous.
+- Ce workflow s’exécute à chaque push sur les branches `dev`, `staging`, ou `main`.
+- Il installe les dépendances, lance les tests, zippe le code, puis déploie sur AWS via Terraform.
+
+---
+
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - dev
+      - staging
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    env:
+      AWS_REGION: eu-west-2
+      STAGE: ${{ github.ref_name }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+
+      - name: Copy .env
+        run: cp .env.example .env
+
+      - name: Generate Laravel key
+        run: php artisan key:generate
+
+      - name: Run migrations
+        run: php artisan migrate --force
+
+      - name: Run tests
+        run: php artisan test
+
+      - name: Zip Lambda code
+        run: zip -r lambda.zip .
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      - name: Terraform Init
+        run: terraform -chdir=terraform init
+
+      - name: Terraform Apply
+        run: terraform -chdir=terraform apply -var="stage=${{ env.STAGE }}" -auto-approve
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ env.AWS_REGION }}
+
+---
+
+# À faire côté GitHub
+- Ajoute tes clés AWS dans les secrets du repo :
+  - `AWS_ACCESS_KEY_ID`
+  - `AWS_SECRET_ACCESS_KEY`
+
+# Ce workflow automatise le build, les tests et le déploiement sur AWS à chaque push sur dev, staging ou main.
