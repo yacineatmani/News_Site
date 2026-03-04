@@ -1,14 +1,7 @@
-FROM node:20-alpine AS frontend_build
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci
-COPY . .
-RUN npm run build
-
 FROM composer:2 AS vendor_build
 WORKDIR /app
 COPY composer.json composer.lock ./
-RUN composer install --no-dev --optimize-autoloader --no-interaction --no-progress
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-progress --ignore-platform-reqs
 
 FROM php:8.2-cli-alpine AS app
 WORKDIR /var/www/html
@@ -18,7 +11,6 @@ RUN apk add --no-cache bash git libzip-dev sqlite-dev oniguruma-dev icu-dev \
 
 COPY . .
 COPY --from=vendor_build /app/vendor ./vendor
-COPY --from=frontend_build /app/public/build ./public/build
 
 RUN mkdir -p storage/logs bootstrap/cache database \
     && touch database/database.sqlite \
