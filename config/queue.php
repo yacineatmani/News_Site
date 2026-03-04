@@ -1,5 +1,12 @@
 <?php
 
+$queueConnection = env('QUEUE_CONNECTION', 'database');
+$dbConnection = env('DB_CONNECTION', 'sqlite');
+
+if ($queueConnection === 'database' && $dbConnection === 'pgsql' && ! extension_loaded('pdo_pgsql')) {
+    $queueConnection = 'sync';
+}
+
 return [
 
     /*
@@ -13,7 +20,7 @@ return [
     |
     */
 
-    'default' => env('QUEUE_CONNECTION', 'database'),
+    'default' => $queueConnection,
 
     /*
     |--------------------------------------------------------------------------

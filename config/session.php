@@ -2,6 +2,13 @@
 
 use Illuminate\Support\Str;
 
+$sessionDriver = env('SESSION_DRIVER', 'database');
+$dbConnection = env('DB_CONNECTION', 'sqlite');
+
+if ($sessionDriver === 'database' && $dbConnection === 'pgsql' && ! extension_loaded('pdo_pgsql')) {
+    $sessionDriver = 'file';
+}
+
 return [
 
     /*
@@ -18,7 +25,7 @@ return [
     |
     */
 
-    'driver' => env('SESSION_DRIVER', 'database'),
+    'driver' => $sessionDriver,
 
     /*
     |--------------------------------------------------------------------------

@@ -2,6 +2,13 @@
 
 use Illuminate\Support\Str;
 
+$cacheStore = env('CACHE_STORE', 'database');
+$dbConnection = env('DB_CONNECTION', 'sqlite');
+
+if ($cacheStore === 'database' && $dbConnection === 'pgsql' && ! extension_loaded('pdo_pgsql')) {
+    $cacheStore = 'file';
+}
+
 return [
 
     /*
@@ -15,7 +22,7 @@ return [
     |
     */
 
-    'default' => env('CACHE_STORE', 'database'),
+    'default' => $cacheStore,
 
     /*
     |--------------------------------------------------------------------------

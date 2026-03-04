@@ -2,6 +2,12 @@
 
 use Illuminate\Support\Str;
 
+$defaultConnection = env('DB_CONNECTION', 'sqlite');
+
+if ($defaultConnection === 'pgsql' && ! extension_loaded('pdo_pgsql')) {
+    $defaultConnection = 'sqlite';
+}
+
 return [
 
     /*
@@ -16,7 +22,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'sqlite'),
+    'default' => $defaultConnection,
 
     /*
     |--------------------------------------------------------------------------
