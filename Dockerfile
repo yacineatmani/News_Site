@@ -1,7 +1,7 @@
 FROM composer:2 AS vendor_build
 WORKDIR /app
 COPY composer.json composer.lock ./
-RUN composer install --no-dev --optimize-autoloader --no-interaction --no-progress --ignore-platform-reqs
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-progress --ignore-platform-reqs --no-scripts
 
 FROM php:8.2-cli-alpine AS app
 WORKDIR /var/www/html
